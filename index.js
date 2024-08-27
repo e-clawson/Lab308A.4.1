@@ -1,5 +1,5 @@
-import * as Carousel from "./Carousel.js";
-import axios from "axios";
+// import * as Carousel from "./Carousel.js";
+// import axios from "axios";
 
 // The breed selection input element.
 const breedSelect = document.getElementById("breedSelect");
@@ -11,7 +11,7 @@ const progressBar = document.getElementById("progressBar");
 const getFavouritesBtn = document.getElementById("getFavouritesBtn");
 
 // Step 0: Store your API key here for reference and easy access.
-const API_KEY = "";
+const API_KEY = "live_Es3cWPLAwQH0X3Nk48kJtEgjzAskeBrzI2ZYlFrxkScKv8daA1DF4XJKiS704Sgx";
 
 /**
  * 1. Create an async function "initialLoad" that does the following:
@@ -21,6 +21,18 @@ const API_KEY = "";
  *  - Each option should display text equal to the name of the breed.
  * This function should execute immediately.
  */
+async function initialLoad(){
+    const response = await fetch("https://api.thecatapi.com/v1/breeds")
+    console.log(response)
+    const jsonData = await response.json(); 
+    console.log(jsonData)
+    jsonData.forEach(element => {
+        breed = element.name
+        console.log(breed)
+        
+    });
+}
+initialLoad()
 
 /**
  * 2. Create an event handler for breedSelect that does the following:
@@ -88,9 +100,9 @@ const API_KEY = "";
  *   you delete that favourite using the API, giving this function "toggle" functionality.
  * - You can call this function by clicking on the heart at the top right of any image.
  */
-export async function favourite(imgId) {
-  // your code here
-}
+// export async function favourite(imgId) {
+//   // your code here
+// }
 
 /**
  * 9. Test your favourite() function by creating a getFavourites() function.
