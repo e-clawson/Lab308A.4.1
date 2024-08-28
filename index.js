@@ -1,4 +1,4 @@
-// import * as Carousel from "./Carousel.js";
+import * as Carousel from "./Carousel.js";
 // import axios from "axios";
 
 // The breed selection input element.
@@ -11,7 +11,7 @@ const progressBar = document.getElementById("progressBar");
 const getFavouritesBtn = document.getElementById("getFavouritesBtn");
 
 // Step 0: Store your API key here for reference and easy access.
-const API_KEY = "live_Es3cWPLAwQH0X3Nk48kJtEgjzAskeBrzI2ZYlFrxkScKv8daA1DF4XJKiS704Sgx";
+//no - I got in trouble on github for doing this  
 
 /**
  * 1. Create an async function "initialLoad" that does the following:
@@ -65,12 +65,22 @@ async function breedRetriever(id) {
     const response = await fetch(`https://api.thecatapi.com/v1/images/search?limit=10&breed_ids=${id}&api_key=live_Es3cWPLAwQH0X3Nk48kJtEgjzAskeBrzI2ZYlFrxkScKv8daA1DF4XJKiS704Sgx`);
     console.log(response);
     const jsonData = await response.json(); 
-    console.log(jsonData)
+    console.log(jsonData);
     jsonData.forEach(element => {
-        let img = element.url
+        let img = element.url;
         console.log(img)
+        let carouselClass = document.getElementById("carouselInner")
+        let catItem = document.createElement("div");
+        catItem.setAttribute("class", "carousel-item")
+        let catPic = document.createElement("img");
+        catPic.setAttribute("src", img);
+        Carousel.appendChild(catItem)
+        catItem.appendChild(catPic)
+        //items are being appended but they aren't rendering on the page - not being passed to the
+        //carousel.js file? 
     });
 }
+breedRetriever();
 
 /**
  * 3. Fork your own sandbox, creating a new one named "JavaScript Axios Lab."
