@@ -23,15 +23,14 @@ const API_KEY = "live_Es3cWPLAwQH0X3Nk48kJtEgjzAskeBrzI2ZYlFrxkScKv8daA1DF4XJKiS
  */
 async function initialLoad(){
     const response = await fetch("https://api.thecatapi.com/v1/breeds")
-    console.log(response)
     const jsonData = await response.json(); 
-    console.log(jsonData)
     await jsonData.forEach(element => {
         let breed = element.name;
         let idValue = element.id;
         let breedOption = document.createElement("option");
         breedOption.textContent = breed;
         breedOption.setAttribute("id", idValue);
+        
         breedSelect.appendChild(breedOption);
     });
 }
@@ -52,16 +51,26 @@ initialLoad()
  * - Add a call to this function to the end of your initialLoad function above to create the initial carousel.
  */
 
+
 breedSelect.addEventListener("change", (event) => {
-    console.log(event.target.value)
+    let index = breedSelect.selectedIndex;
+    let selectedCatBreed = event.target[index];
+    let id = selectedCatBreed.id;
     
-    // const response = fetch(`https://api.thecatapi.com/v1/images/search?breed_ids=${event.id}`);
-    // console.log(response);
-    // const jsonData = await response.json(); 
-    // console.log(jsonData)
+    breedRetriever(id)
+})
 
-});
+async function breedRetriever(id) {
 
+    const response = await fetch(`https://api.thecatapi.com/v1/images/search?limit=10&breed_ids=${id}&api_key=live_Es3cWPLAwQH0X3Nk48kJtEgjzAskeBrzI2ZYlFrxkScKv8daA1DF4XJKiS704Sgx`);
+    console.log(response);
+    const jsonData = await response.json(); 
+    console.log(jsonData)
+    jsonData.forEach(element => {
+        let img = element.url
+        console.log(img)
+    });
+}
 
 /**
  * 3. Fork your own sandbox, creating a new one named "JavaScript Axios Lab."
