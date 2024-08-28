@@ -29,12 +29,9 @@ async function initialLoad(){
     await jsonData.forEach(element => {
         let breed = element.name;
         let idValue = element.id;
-        console.log(breed);
-        console.log(idValue);
         let breedOption = document.createElement("option");
         breedOption.textContent = breed;
         breedOption.setAttribute("id", idValue);
-        console.log(breedOption);
         breedSelect.appendChild(breedOption);
     });
 }
@@ -56,7 +53,8 @@ initialLoad()
  */
 
 breedSelect.addEventListener("change", (event) => {
-    console.log(event.target)
+    console.log(event.target.value)
+    
     // const response = fetch(`https://api.thecatapi.com/v1/images/search?breed_ids=${event.id}`);
     // console.log(response);
     // const jsonData = await response.json(); 
